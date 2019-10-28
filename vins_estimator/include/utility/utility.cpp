@@ -7,7 +7,7 @@
  * you may not use this file except in compliance with the License.
  *******************************************************/
 
-#include "utility/utility.h"
+#include "utility.h"
 
 Eigen::Matrix3d Utility::g2R(const Eigen::Vector3d &g)
 {

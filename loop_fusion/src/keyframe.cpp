@@ -9,7 +9,7 @@
  * Author: Qin Tong (qintonguav@gmail.com)
  *******************************************************/
 
-#include "keyframe.h"
+#include <keyframe.h>
 
 template <typename Derived>
 static void reduceVector(vector<Derived> &v, vector<uchar> status)

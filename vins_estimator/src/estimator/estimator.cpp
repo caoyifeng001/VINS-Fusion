@@ -7,8 +7,8 @@
  * you may not use this file except in compliance with the License.
  *******************************************************/
 
-#include "estimator.h"
-#include "../utility/visualization.h"
+#include "estimator/estimator.h"
+#include "utility/visualization.h"
 
 Estimator::Estimator(): f_manager{Rs}
 {

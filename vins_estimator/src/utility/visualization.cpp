@@ -7,8 +7,8 @@
  * you may not use this file except in compliance with the License.
  *******************************************************/
 
-#include "visualization.h"
-
+#include "utility/visualization.h"
+#include <ros/ros.h>
 using namespace ros;
 using namespace Eigen;
 ros::Publisher pub_odometry, pub_latest_odometry;
@@ -31,6 +31,7 @@ size_t pub_counter = 0;
 
 void registerPub(ros::NodeHandle &n)
 {
+    // ROS_DEBUG("registerPub");
     pub_latest_odometry = n.advertise<nav_msgs::Odometry>("imu_propagate", 1000);
     pub_path = n.advertise<nav_msgs::Path>("path", 1000);
     pub_odometry = n.advertise<nav_msgs::Odometry>("odometry", 1000);
@@ -110,8 +111,10 @@ void printStatistics(const Estimator &estimator, double t)
 
 void pubOdometry(const Estimator &estimator, const std_msgs::Header &header)
 {
+    
     if (estimator.solver_flag == Estimator::SolverFlag::NON_LINEAR)
     {
+        // ROS_DEBUG("pubOdometry");
         nav_msgs::Odometry odometry;
         odometry.header = header;
         odometry.header.frame_id = "world";
@@ -198,6 +201,7 @@ void pubKeyPoses(const Estimator &estimator, const std_msgs::Header &header)
 
 void pubCameraPose(const Estimator &estimator, const std_msgs::Header &header)
 {
+    ROS_DEBUG("pubCameraPose");
     int idx2 = WINDOW_SIZE - 1;
 
     if (estimator.solver_flag == Estimator::SolverFlag::NON_LINEAR)

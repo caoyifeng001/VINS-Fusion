@@ -1,0 +1,6 @@
+<launch>
+    <node name="vins_estimator" pkg="vins" type="vins_node" output="screen" args="/home/cbin/vinsfusin_ws/src/VINS-Fusion/config/euroc/euroc_stereo_imu_config.yaml" /> 
+    <node name="loop_fusion" pkg="loop_fusion" type="loop_fusion_node" output="screen" args="/home/cbin/vinsfusin_ws/src/VINS-Fusion/config/euroc/euroc_stereo_imu_config.yaml" />
+    <node name="playe" pkg="rosbag" type="play" args=" /home/cbin/data_set/SLAM/MH_01_easy.bag"/>
+    <node name="rvizvisualisation" pkg="rviz" type="rviz"  args="-d $(find vins)/../config/vins_rviz_config.rviz" />
+</launch>

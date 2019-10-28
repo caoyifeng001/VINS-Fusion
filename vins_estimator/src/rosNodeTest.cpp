@@ -72,7 +72,7 @@ void sync_process()
 {
     while(1)
     {
-        if(STEREO)
+        if(STEREO)  //双目
         {
             cv::Mat image0, image1;
             std_msgs::Header header;
@@ -82,6 +82,7 @@ void sync_process()
             {
                 double time0 = img0_buf.front()->header.stamp.toSec();
                 double time1 = img1_buf.front()->header.stamp.toSec();
+                //帧头对齐
                 if(time0 < time1)
                 {
                     img0_buf.pop();
@@ -105,9 +106,9 @@ void sync_process()
             }
             m_buf.unlock();
             if(!image0.empty())
-                estimator.inputImage(time, image0, image1);
+                estimator.inputImage(time, image0, image1);  //处理一帧图像
         }
-        else
+        else  //单目
         {
             cv::Mat image;
             std_msgs::Header header;
@@ -200,7 +201,7 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "vins_estimator");
     ros::NodeHandle n("~");
-    ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
+    ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
 
     if(argc != 2)
     {

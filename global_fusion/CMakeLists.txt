@@ -13,7 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 find_package(Ceres REQUIRED)
-
+include_directories("include")
 add_subdirectory(./ThirdParty/GeographicLib/)
 
 include_directories(
